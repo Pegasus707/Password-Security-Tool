@@ -1,0 +1,134 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Base Body Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1a1b26; /* Tokyo Night - bg_dark */
+}
+
+/* Main Application Card */
+.main-card {
+    background-color: #24283b; /* Tokyo Night - bg */
+    border: 1px solid rgba(156, 163, 175, 0.1); /* Faint border */
+}
+
+/* Accent Color */
+.accent-blue {
+    color: #7aa2f7; /* Tokyo Night - blue */
+}
+
+/* Form Input Styling */
+.form-input {
+    background-color: #1a1b26; /* Tokyo Night - bg_dark */
+    border-color: #414868; /* Tokyo Night - fg_gutter */
+}
+.form-input:focus {
+    --tw-ring-color: #7aa2f7;
+    border-color: #7aa2f7;
+}
+
+/* Strength Bar and Animations */
+#strength-bar-inner {
+    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.fa-spinner { 
+    animation: spin 1s linear infinite; 
+}
+@keyframes spin { 
+    from { transform: rotate(0deg); } 
+    to { transform: rotate(360deg); } 
+}
+
+.icon-pop { 
+    animation: pop 0.5s ease-out; 
+}
+@keyframes pop {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.shimmer::after {
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: -100%; 
+    width: 50%; 
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+    animation: shimmer 1.5s ease-out; 
+    animation-delay: 0.3s;
+}
+@keyframes shimmer { 
+    from { left: -100%; } 
+    to { left: 150%; } 
+}
+
+/* Custom Range Slider */
+input[type="range"] { 
+    -webkit-appearance: none; 
+    appearance: none; 
+    background: transparent; 
+    cursor: pointer; 
+}
+input[type="range"]::-webkit-slider-runnable-track { 
+    background: #414868; 
+    height: 0.5rem; 
+    border-radius: 1rem; 
+}
+input[type="range"]::-moz-range-track { 
+    background: #414868; 
+    height: 0.5rem; 
+    border-radius: 1rem; 
+}
+input[type="range"]::-webkit-slider-thumb { 
+    -webkit-appearance: none; 
+    appearance: none; 
+    margin-top: -4px; 
+    background-color: #7aa2f7; 
+    height: 1.25rem; 
+    width: 1.25rem; 
+    border-radius: 50%; 
+    border: 2px solid #1a1b26; 
+}
+input[type="range"]::-moz-range-thumb { 
+    background-color: #7aa2f7; 
+    height: 1.25rem; 
+    width: 1.25rem; 
+    border-radius: 50%; 
+    border: 2px solid #1a1b26; 
+}
+input[type="range"]:focus::-webkit-slider-thumb { 
+    outline: 3px solid #7aa2f7; 
+    outline-offset: 2px; 
+}
+
+/* Custom Checkbox */
+.form-checkbox { 
+    appearance: none; 
+    background-color: #1a1b26; 
+    border: 2px solid #414868; 
+    padding: 0; 
+    display: inline-block; 
+    vertical-align: middle; 
+    position: relative; 
+    cursor: pointer; 
+}
+.form-checkbox:checked { 
+    background-color: #7aa2f7; 
+    border-color: #7aa2f7; 
+}
+.form-checkbox:checked::after { 
+    content: '✔'; 
+    position: absolute; 
+    color: #1a1b26; 
+    font-weight: bold; 
+    font-size: 12px; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}

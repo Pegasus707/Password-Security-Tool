@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Security Tool</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-gray-300 flex items-center justify-center min-h-screen p-4">
+
+    <div class="main-card w-full max-w-xl rounded-2xl shadow-2xl p-10 space-y-8">
+        
+        <!-- Header -->
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-white flex items-center justify-center gap-3">
+                <i class="fa-solid fa-shield-halved accent-blue"></i>
+                <span>Password Security Tool</span>
+            </h1>
+            <p class="text-gray-400 mt-3">Your guide to creating strong, unbreachable passwords.</p>
+        </div>
+
+        <!-- Password Analyzer Section -->
+        <div class="space-y-5">
+            <h2 class="text-xl font-semibold text-white text-center">Password Analyzer</h2>
+            <div class="relative">
+                <input type="password" id="password-input" placeholder="Type or generate a password..." class="form-input w-full rounded-lg p-4 pr-12 text-white placeholder-gray-500 focus:outline-none focus:ring-2 transition">
+                 <button id="toggle-visibility" class="absolute top-1/2 right-4 -translate-y-1/2 text-gray-400 hover:accent-blue transition rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#24283b] focus:ring-blue-500">
+                    <i class="fa-solid fa-eye text-xl"></i>
+                </button>
+            </div>
+
+            <div class="w-full bg-[#414868] rounded-full h-2.5">
+                <div id="strength-bar-inner" class="h-2.5 rounded-full"></div>
+            </div>
+            <div class="h-5">
+                <p id="strength-text" class="text-center font-medium text-gray-400"></p>
+                <div id="pattern-warning" class="text-center text-yellow-300 font-semibold text-sm"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm pt-2">
+                <div id="length-check" class="flex items-center text-gray-500 transition-colors"><i class="fa-solid fa-times-circle w-5 mr-2"></i><span>At least 12 characters</span></div>
+                <div id="uppercase-check" class="flex items-center text-gray-500 transition-colors"><i class="fa-solid fa-times-circle w-5 mr-2"></i><span>One uppercase letter</span></div>
+                <div id="lowercase-check" class="flex items-center text-gray-500 transition-colors"><i class="fa-solid fa-times-circle w-5 mr-2"></i><span>One lowercase letter</span></div>
+                <div id="number-check" class="flex items-center text-gray-500 transition-colors"><i class="fa-solid fa-times-circle w-5 mr-2"></i><span>One number</span></div>
+                <div id="symbol-check" class="flex items-center text-gray-500 transition-colors"><i class="fa-solid fa-times-circle w-5 mr-2"></i><span>One symbol (!@#$)</span></div>
+                <div id="pwned-check" class="flex items-center text-gray-500 transition-colors font-semibold">
+                    <i class="fa-solid fa-question-circle w-5 mr-2"></i>
+                    <span>Checked for breaches</span>
+                    <div class="relative group flex items-center ml-2">
+                        <i class="fa-solid fa-circle-info text-gray-400 cursor-help"></i>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 p-3 bg-[#2f3549] text-gray-300 text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                            This check uses the 'Have I Been Pwned' API. Your password is securely hashed, and only the first 5 characters of the hash are sent to protect your privacy.
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-[#2f3549]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gradient Separator -->
+        <div class="py-6">
+            <div class="h-px bg-gradient-to-r from-transparent via-[#414868] to-transparent"></div>
+        </div>
+
+        <!-- Password Generator Section -->
+        <div class="space-y-5">
+            <h2 class="text-xl font-semibold text-white text-center">Secure Password Generator</h2>
+            <div class="relative">
+                <input type="text" id="generated-password" readonly placeholder="Click 'Generate' to create a new key" class="form-input w-full rounded-lg p-4 text-white font-mono tracking-wider pr-12">
+                <button id="copy-button" class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:accent-blue transition rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#24283b] focus:ring-blue-500"><i class="fa-solid fa-copy text-xl"></i></button>
+            </div>
+            <p id="copy-feedback" class="text-center text-sm text-green-400 h-4"></p>
+
+            <div class="flex items-center justify-between gap-4 flex-wrap">
+                <div class="flex items-center space-x-2">
+                    <label for="length-slider" class="font-medium">Length:</label>
+                    <span id="length-value" class="font-bold accent-blue w-8 text-center">16</span>
+                    <input type="range" id="length-slider" min="8" max="32" value="16" class="w-24 sm:w-32">
+                </div>
+                <div class="flex items-center space-x-4">
+                    <label class="flex items-center space-x-2 cursor-pointer group">
+                        <input type="checkbox" id="uppercase-option" checked class="form-checkbox h-4 w-4 rounded transition">
+                        <span class="group-hover:accent-blue transition">A-Z</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer group">
+                        <input type="checkbox" id="numbers-option" checked class="form-checkbox h-4 w-4 rounded transition">
+                        <span class="group-hover:accent-blue transition">0-9</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer group">
+                        <input type="checkbox" id="symbols-option" checked class="form-checkbox h-4 w-4 rounded transition">
+                        <span class="group-hover:accent-blue transition">!@#</span>
+                    </label>
+                </div>
+            </div>
+             <button id="generate-button" class="w-full bg-blue-500 hover:bg-blue-400 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 mt-4 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#24283b] focus:ring-blue-500">
+                <i class="fa-solid fa-key mr-2"></i>Generate Secure Key
+            </button>
+        </div>
+    </div>
+
+    <!-- Your Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
