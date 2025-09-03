@@ -1,3 +1,5 @@
+URL : https://password-security-tool-one.vercel.app/
+
 ✨ What It Does:
 
   Intelligent Analysis: This tool does more than just count characters. It provides smart feedback by spotting common passwords, predictable keyboard patterns (like qwerty), and sequential numbers or letters (like 123 or abc).
@@ -11,3 +13,5 @@
 🛠️ Built With:
 
   This tool is built with standard web technologies, keeping it lightweight and fast. The main components are HTML5, CSS3, and JavaScript (ES6+), with Tailwind CSS for styling and Font Awesome for icons.
+
+
